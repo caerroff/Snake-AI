@@ -2,8 +2,13 @@ import pygame, time
 from random import randint
 pygame.init()
 dis=pygame.display.set_mode((400,300))
- 
-pygame.display.set_caption('Snake game by Edureka')
+
+pygame.display.set_caption('Snake')
+
+def spawnApple(max_x, max_y):
+    x = randint
+    apple = (x,y)
+    return apple
  
 blue=(0,0,255)
 red=(255,0,0)
@@ -35,7 +40,9 @@ while not game_over:
     if len(snake) > snakeLength :
         pygame.draw.rect(dis, black, [snake[snakeLength][0],snake[snakeLength][1],10,10])
         snake.pop()
-        
+    
+    apple = spawnApple(400,300)
+
     if ori == 'N':
         y = y-10
     if ori == 'E':
@@ -53,12 +60,10 @@ while not game_over:
     if x<0 or x+10>400 or y<0 or y+10>300:
         game_over = True
 
+
+
 time.sleep(2)
 pygame.quit()
 quit()
 
 
-def spawnApple(max_x, max_y):
-    x = randint
-    apple = (x,y)
-    return apple
