@@ -1,13 +1,27 @@
-import pygame, time
+try:
+    import pygame, time
+except ImportError:
+    print("Cannot import pygame, try 'pip3 install pygame'")
 from random import randint
 pygame.init()
 dis=pygame.display.set_mode((400,300))
 
 pygame.display.set_caption('Snake')
 
+
+
 def spawnApple(max_x, max_y):
-    x = randint
+    x = randint(0,max_x)
+    y = randint(0,max_y)
+    x = (x//10) * 10
+    y = (y//10) * 10
     apple = (x,y)
+    if apple in snake:
+        x = randint(0,max_x)
+        y = randint(0,max_y)
+        x = (x//10) * 10
+        y = (y//10) * 10
+        apple = (x,y)
     return apple
  
 blue=(0,0,255)
@@ -41,7 +55,14 @@ while not game_over:
         pygame.draw.rect(dis, black, [snake[snakeLength][0],snake[snakeLength][1],10,10])
         snake.pop()
     
-    apple = spawnApple(400,300)
+    if apple == ():
+        apple = spawnApple(400,300)
+        pygame.draw.rect(dis, red, [apple[0], apple[1], 10,10])
+
+    if x == apple[0] and y == apple[1]:
+        snakeLength += 1
+        apple = spawnApple(400,300)
+        pygame.draw.rect(dis, red, [apple[0], apple[1], 10,10])
 
     if ori == 'N':
         y = y-10
@@ -53,6 +74,7 @@ while not game_over:
         x = x-10
     if (x,y) in snake:
         game_over = True
+
     pygame.draw.rect(dis,blue,[x,y,10,10])
     pygame.display.update()
     
